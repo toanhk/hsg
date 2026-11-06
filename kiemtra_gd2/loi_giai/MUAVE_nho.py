@@ -1,5 +1,8 @@
-# MUAVE - ban co nho (dict) + setrecursionlimit: dung nhung sau n tang. Qua subtask 2 (n <= 10^5)?
-# Khong chac: sau 10^5 tang tren may phong co the tran ngan xep C. Subtask 3 (5*10^5) -> loi.
+# MUAVE - ban co nho (dict) + setrecursionlimit: dung nhung de quy sau n tang.
+# Ket qua phu thuoc phien ban Python o phong thi:
+#   - Python <= 3.11: moi tang de quy ton ngan xep C -> n ~ 10^5 da co the chet khong bao loi.
+#   - Python 3.12+: khong tran nua (do tren may 3.13: 10/10 test, ~0.7 s) nhung cham gap doi ban vong lap.
+# Khong nen nop ban nay: dung MUAVE.py (vong lap) cho chac.
 import sys
 
 def main():
