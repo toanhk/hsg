@@ -11,6 +11,9 @@ Code cho lộ trình 24 buổi trong `lo-trinh-hsg-tin-do-thi-qhd-python.md`.
 | 5 | QHĐ một chiều | KHONGKE, DOANMAX, TORAO | ECHNHAY, COPHIEU, XOA1 |
 | 6 | Cái túi | TUI01, TUIVOHAN, TRUYVET | CHIAKEO, DOITIEN2, TUILON |
 | 7 | Dãy con: LIS, LCS, sửa xâu | LIS, LCS, SUAXAU | DOIXUNG, TENLUA, THAPHOP |
+| 8 | QHĐ trên lưới | DUONGDI, DEMDUONG, HINHVUONG | VANG, HVCON, HAIROBOT |
+
+Kiểm tra cuối giai đoạn 2 (120 phút): `kiemtra_gd2/` gồm MUAVE, BALO, NUI.
 
 Mỗi thư mục `buoiNN/` có `loi_giai/` (lời giải chính + bản vét cạn `_trau`), `sinh_test.py`
 (sinh test theo cấu trúc Themis `test/BAI/TestNN/`), `cham_thu.py` và `template.py`.
