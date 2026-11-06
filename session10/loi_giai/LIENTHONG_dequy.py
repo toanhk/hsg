@@ -1,6 +1,7 @@
 # LIENTHONG - ban DE QUY (de chua tren lop): dung tren do thi ngau nhien, nhung tren do thi
 # DUONG THANG 1-2-...-n thi do sau de quy = n.
-#  - Khong co setrecursionlimit: RecursionError tu do sau ~1000 (Test07, Test09).
+#  - Khong co setrecursionlimit: RecursionError tu do sau ~1000 -> sai moi test lon (Test05, Test07-10),
+#    ca do thi ngau nhien vi DFS de quy di rat sau trong thanh phan lon, khong chi duong thang.
 #  - Co setrecursionlimit(10**6): Python 3.12+ tren Linux chay duoc; Python 3.8-3.11
 #    (hay gap o phong thi, nhat la tren Windows) vo ngan xep C -> chuong trinh chet khong bao loi.
 # => Quy tac cua lop: DFS luon viet bang ngan xep (xem LIENTHONG.py).
