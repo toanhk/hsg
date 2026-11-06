@@ -1,8 +1,8 @@
-# SINH TEST cho de kiem tra cuoi giai doan 4 (thi thu nua chang, 150 phut): DONGHANG, MOTUYEN, PHANCUM
+# SINH TEST cho de kiem tra cuoi giai doan 4 (thi thu nua chang, 150 phut): DONGHANG, CHONTUYEN, PHANCUM
 # Cau truc thu muc theo Themis: test/DONGHANG/Test01/DONGHANG.INP + DONGHANG.OUT
 # Dap an tinh bang ham "dap_an_..." viet theo cach KHAC loi giai mau de kiem cheo:
 #   DONGHANG QHD "day toi" (tu f[j] cap nhat cac f[i] phia sau) thay vi "keo ve",
-#   MOTUYEN Dijkstra MOT lan tren do thi trang thai (nut, da dung tuyen moi chua) de lay thoi gian tot nhat,
+#   CHONTUYEN Dijkstra MOT lan tren do thi trang thai (nut, da dung tuyen moi chua) de lay thoi gian tot nhat,
 #     roi tim so hieu nho nhat dat thoi gian do,
 #   PHANCUM Kruskal tren do thi day du, dung khi con k thanh phan (loi giai mau dung Prim O(n^2)).
 # Moi bai 10 test: Test01-04 subtask 1 (40%), Test05-07 subtask 2 (30%), Test08-10 subtask 3 (30%)
@@ -64,8 +64,8 @@ def sinh_donghang():
         inp = f'{n} {K} {W}\n' + ' '.join(map(str, a)) + '\n'
         ghi('DONGHANG', so, inp, dap_an_donghang(n, K, W, a))
 
-# ---------------- MOTUYEN ----------------
-def dap_an_motuyen(n, canh, de_xuat):
+# ---------------- CHONTUYEN ----------------
+def dap_an_chontuyen(n, canh, de_xuat):
     INF = 1 << 62
     adj = [[] for _ in range(2 * (n + 1))]   # dinh v (chua dung tuyen moi) va v + n + 1 (da dung)
     for u, v, w in canh:
@@ -111,7 +111,7 @@ def ngau_nhien(n, m, wmax, lien_thong=True):
     random.shuffle(canh)
     return canh
 
-def sinh_motuyen():
+def sinh_chontuyen():
     for so in range(1, 11):
         if so == 1:
             n = 5; canh = [(1, 2, 4), (2, 3, 4), (3, 5, 4), (1, 4, 3), (4, 5, 10)]
@@ -140,7 +140,7 @@ def sinh_motuyen():
                 canh = [(i, i + 1, random.randint(10**8, 10**9)) for i in range(1, n)] + canh[:1]
         inp = f'{n} {len(canh)} {len(dx)}\n' + ''.join(f'{u} {v} {w}\n' for u, v, w in canh) \
               + ''.join(f'{u} {v} {c}\n' for u, v, c in dx)
-        ghi('MOTUYEN', so, inp, dap_an_motuyen(n, canh, dx))
+        ghi('CHONTUYEN', so, inp, dap_an_chontuyen(n, canh, dx))
 
 # ---------------- PHANCUM ----------------
 def dap_an_phancum(n, k, P):
@@ -185,7 +185,7 @@ def sinh_phancum():
         inp = f'{n} {k}\n' + ''.join(f'{x} {y}\n' for x, y in P)
         ghi('PHANCUM', so, inp, dap_an_phancum(n, k, P))
 
-SINH = {'DONGHANG': sinh_donghang, 'MOTUYEN': sinh_motuyen, 'PHANCUM': sinh_phancum}
+SINH = {'DONGHANG': sinh_donghang, 'CHONTUYEN': sinh_chontuyen, 'PHANCUM': sinh_phancum}
 
 def main():
     ds = sys.argv[1:] or list(SINH)

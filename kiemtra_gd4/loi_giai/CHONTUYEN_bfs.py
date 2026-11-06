@@ -1,4 +1,4 @@
-# MOTUYEN - loi giai subtask 2 (moi w = c = 1): thay Dijkstra bang BFS. Dung y tuong "2 lan tim duong" nhung
+# CHONTUYEN - loi giai subtask 2 (moi w = c = 1): thay Dijkstra bang BFS. Dung y tuong "2 lan tim duong" nhung
 # chi lay diem subtask 2 (subtask 1 va 3 co trong so khac 1 -> sai). Cham thu: 3/10 test.
 def bfs(n, adj, s):
     d = [-1] * (n + 1); d[s] = 0; q = [s]
@@ -9,7 +9,7 @@ def bfs(n, adj, s):
     return d
 
 def main():
-    data = open('MOTUYEN.INP', 'rb').read().split()
+    data = open('CHONTUYEN.INP', 'rb').read().split()
     n, m, k = int(data[0]), int(data[1]), int(data[2])
     adj = [[] for _ in range(n + 1)]
     p = 3
@@ -28,7 +28,7 @@ def main():
             t = min(t, d1[v] + 1 + dn[u])
         if t < best:
             best = t; tuyen = i
-    with open('MOTUYEN.OUT', 'w') as f:
+    with open('CHONTUYEN.OUT', 'w') as f:
         f.write('-1\n' if best == INF else f'{best} {tuyen}\n')
 
 main()

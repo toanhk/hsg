@@ -1,4 +1,4 @@
-# MOTUYEN: n nut, m duong hai chieu (u, v, thoi gian w). Can di tu nut 1 den nut n. Thanh pho co k de xuat mo
+# CHONTUYEN: n nut, m duong hai chieu (u, v, thoi gian w). Can di tu nut 1 den nut n. Thanh pho co k de xuat mo
 # tuyen moi (de xuat thu i: duong hai chieu u_i - v_i, thoi gian c_i) va duoc mo TOI DA MOT tuyen.
 # In thoi gian ngan nhat co the va so hieu tuyen nen mo (0 neu khong mo tuyen nao van tot nhat; nhieu tuyen
 # cung tot thi in so hieu nho nhat). Khong the toi n thi in -1.  n, m, k <= 10^5; w, c <= 10^9.
@@ -29,7 +29,7 @@ def dijkstra(n, adj, s):
     return d
 
 def main():
-    data = open('MOTUYEN.INP', 'rb').read().split()
+    data = open('CHONTUYEN.INP', 'rb').read().split()
     n, m, k = int(data[0]), int(data[1]), int(data[2])
     U = list(map(int, data[3:3 + 3 * m:3]))
     V = list(map(int, data[4:4 + 3 * m:3]))
@@ -49,7 +49,7 @@ def main():
         t = min(d1[u] + dn[v], d1[v] + dn[u]) + C[i]
         if t < best:                           # chi doi khi TOT HON HAN -> giu so hieu nho nhat
             best = t; tuyen = i + 1
-    with open('MOTUYEN.OUT', 'w') as f:
+    with open('CHONTUYEN.OUT', 'w') as f:
         f.write('-1\n' if best >= 1 << 62 else f'{best} {tuyen}\n')
 
 main()

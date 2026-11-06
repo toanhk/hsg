@@ -1,7 +1,7 @@
-# MOTUYEN - vet can (n <= 100): Floyd tinh khoang cach moi cap, roi voi moi de xuat chay lai Dijkstra
+# CHONTUYEN - vet can (n <= 100): Floyd tinh khoang cach moi cap, roi voi moi de xuat chay lai Dijkstra
 # "ngay tho" O(n^2) tren do thi co them tuyen do. O(n^3 + k * n^2): chi cho subtask 1.
 def main():
-    data = open('MOTUYEN.INP', 'rb').read().split()
+    data = open('CHONTUYEN.INP', 'rb').read().split()
     n, m, k = int(data[0]), int(data[1]), int(data[2])
     INF = float('inf')
     g = [[INF] * (n + 1) for _ in range(n + 1)]
@@ -32,7 +32,7 @@ def main():
         t = ngan_nhat(e)
         if t < best:
             best = t; tuyen = i
-    with open('MOTUYEN.OUT', 'w') as f:
+    with open('CHONTUYEN.OUT', 'w') as f:
         f.write('-1\n' if best == INF else f'{best} {tuyen}\n')
 
 main()
