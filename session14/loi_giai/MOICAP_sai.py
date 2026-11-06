@@ -1,8 +1,8 @@
-# KHOANGCACH - BAN SAI de chua bai: dat k o VONG TRONG CUNG (for i: for j: for k). Khi tinh d[i][j],
+# MOICAP - BAN SAI de chua bai: dat k o VONG TRONG CUNG (for i: for j: for k). Khi tinh d[i][j],
 # cac d[i][k], d[k][j] co the chua phai ngan nhat -> bo sot duong di qua nhieu dinh trung gian.
 # Test bat loi: xich 1 - 3 - 2 - 4 (ten dinh xao tron), hoi 1 -> 4.
 def main():
-    data = open('KHOANGCACH.INP', 'rb').read().split()
+    data = open('MOICAP.INP', 'rb').read().split()
     n, m, q = int(data[0]), int(data[1]), int(data[2])
     INF = 10**18
     d = [[INF] * n for _ in range(n)]
@@ -22,7 +22,7 @@ def main():
     for _ in range(q):
         u = int(data[p]) - 1; v = int(data[p + 1]) - 1; p += 2
         out.append(str(d[u][v]) if d[u][v] < INF else '-1')
-    with open('KHOANGCACH.OUT', 'w') as f:
+    with open('MOICAP.OUT', 'w') as f:
         f.write('\n'.join(out) + '\n')
 
 main()

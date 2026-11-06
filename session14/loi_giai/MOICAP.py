@@ -1,13 +1,13 @@
-# KHOANGCACH: n thanh pho, m con duong HAI CHIEU (co the nhieu duong giua 2 thanh pho), q cau hoi
+# MOICAP: n thanh pho, m con duong HAI CHIEU (co the nhieu duong giua 2 thanh pho), q cau hoi
 # "khoang cach ngan nhat tu u den v?" (-1 neu khong toi duoc). n <= 200, m <= 2*10^4, q <= 10^5.
 # Floyd: d[i][j] = duong ngan nhat i -> j chi di qua cac dinh trung gian trong {0..k}.
 #   Truy hoi : d[i][j] = min(d[i][j], d[i][k] + d[k][j])     (them dinh k vao tap duoc phep di qua)
-#   Thu tu   : k o VONG NGOAI CUNG (dat k vao trong la sai - xem KHOANGCACH_sai.py)
+#   Thu tu   : k o VONG NGOAI CUNG (dat k vao trong la sai - xem MOICAP_sai.py)
 #   n^3 = 8*10^6 lan so sanh: sat moc Python -> toi uu vong trong:
 #     lay hang di = d[i], dk = d[k] va dik = di[k] ra bien cuc bo; bo qua hang co dik = INF;
 #     duyet enumerate(dk) thay vi range + chi so 2 chieu.  (do: 0,45 s -> 0,30 s, xem do_duongdi.py)
 def main():
-    data = list(map(int, open('KHOANGCACH.INP', 'rb').read().split()))
+    data = list(map(int, open('MOICAP.INP', 'rb').read().split()))
     n, m, q = data[0], data[1], data[2]
     INF = 10**18                           # so nguyen lon (khong dung float de cong nhanh, so sanh deu)
     d = [[INF] * n for _ in range(n)]
@@ -32,7 +32,7 @@ def main():
     for u, v in zip(it, it):
         x = d[u - 1][v - 1]
         out.append(str(x) if x < INF else '-1')
-    with open('KHOANGCACH.OUT', 'w') as f:
+    with open('MOICAP.OUT', 'w') as f:
         f.write('\n'.join(out) + '\n')
 
 main()

@@ -38,7 +38,7 @@ def floyd_hang():                  # lay san hang d[i], d[k] va d[i][k] ra bien 
                     di[j] = dik + dk[j]
     return sum(map(sum, d))
 
-def floyd_enum():                  # lay hang ra + enumerate(dk): NHANH NHAT (dung trong KHOANGCACH.py)
+def floyd_enum():                  # lay hang ra + enumerate(dk): NHANH NHAT (dung trong MOICAP.py)
     d = [r[:] for r in D0]
     for k in range(N):
         dk = d[k]

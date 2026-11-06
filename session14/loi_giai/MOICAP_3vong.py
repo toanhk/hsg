@@ -1,7 +1,7 @@
-# KHOANGCACH - Floyd viet thang 3 vong lap voi chi so d[i][j] (cach "giao khoa"): DUNG nhung cham
-# hon KHOANGCACH.py khoang 1,5 lan vi moi lan d[i][k], d[k][j], d[i][j] deu phai tra 2 lan chi so.
+# MOICAP - Floyd viet thang 3 vong lap voi chi so d[i][j] (cach "giao khoa"): DUNG nhung cham
+# hon MOICAP.py khoang 1,5 lan vi moi lan d[i][k], d[k][j], d[i][j] deu phai tra 2 lan chi so.
 def main():
-    data = open('KHOANGCACH.INP', 'rb').read().split()
+    data = open('MOICAP.INP', 'rb').read().split()
     n, m, q = int(data[0]), int(data[1]), int(data[2])
     INF = 10**18
     d = [[INF] * n for _ in range(n)]
@@ -21,7 +21,7 @@ def main():
     for _ in range(q):
         u = int(data[p]) - 1; v = int(data[p + 1]) - 1; p += 2
         out.append(str(d[u][v]) if d[u][v] < INF else '-1')
-    with open('KHOANGCACH.OUT', 'w') as f:
+    with open('MOICAP.OUT', 'w') as f:
         f.write('\n'.join(out) + '\n')
 
 main()

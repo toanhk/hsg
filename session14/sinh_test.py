@@ -1,10 +1,10 @@
 # SINH TEST cho 6 bai buoi 14 (Bien the duong di)
-#   Tren lop : DAOCHIEU, MIENPHI, KHOANGCACH        Ve nha: GIAMGIA, MOTUYEN, THUONGPHAT
+#   Tren lop : DAOCHIEU, MIENPHI, MOICAP        Ve nha: GIAMGIA, MOTUYEN, THUONGPHAT
 # Cau truc thu muc theo Themis: test/DAOCHIEU/Test01/DAOCHIEU.INP + DAOCHIEU.OUT
 # Dap an tinh bang ham "dap_an_..." viet theo cach KHAC loi giai mau:
 #   DAOCHIEU  : Dijkstra heapq (loi giai mau: BFS 0-1)
 #   MIENPHI   : Dijkstra 2 tang (loi giai mau: 2 lan Dijkstra tu 1 va tu n)
-#   KHOANGCACH: Dijkstra O(n^2) tu moi dinh (loi giai mau: Floyd)
+#   MOICAP: Dijkstra O(n^2) tu moi dinh (loi giai mau: Floyd)
 #   GIAMGIA   : tinh TUNG tang j = 0..k, moi tang mot lan Dijkstra nhieu nguon (loi giai mau: Dijkstra chung)
 #   MOTUYEN   : sau moi tuyen chay 2 buoc Floyd voi k = u roi k = v (loi giai mau: cong thuc qua tuyen)
 #   THUONGPHAT: Bellman-Ford roi chay them toi n vong lan "-vo cuc" (loi giai mau: vong thu n + BFS)
@@ -158,8 +158,8 @@ def sinh_mienphi():
             random.shuffle(canh)
         ghi('MIENPHI', so, f'{n} {len(canh)}\n' + dong(canh), dap_an_mienphi(n, canh))
 
-# ---------------- KHOANGCACH ----------------
-def dap_an_khoangcach(n, canh, hoi):
+# ---------------- MOICAP ----------------
+def dap_an_moicap(n, canh, hoi):
     g = [[INF] * (n + 1) for _ in range(n + 1)]
     for u, v, w in canh:
         if w < g[u][v]:
@@ -187,7 +187,7 @@ def dap_an_khoangcach(n, canh, hoi):
 def hoi_ngau_nhien(n, q):
     return [(random.randint(1, n), random.randint(1, n)) for _ in range(q)]
 
-def sinh_khoangcach():
+def sinh_moicap():
     for so in range(1, 11):
         if so == 1:
             n, canh = 4, [(1, 2, 3), (2, 3, 4), (1, 3, 10), (3, 4, 1)]
@@ -225,7 +225,7 @@ def sinh_khoangcach():
         if so > 1:
             random.shuffle(canh)
         inp = f'{n} {len(canh)} {len(hoi)}\n' + dong(canh) + dong(hoi)
-        ghi('KHOANGCACH', so, inp, dap_an_khoangcach(n, canh, hoi))
+        ghi('MOICAP', so, inp, dap_an_moicap(n, canh, hoi))
 
 # ---------------- GIAMGIA ----------------
 def dap_an_giamgia(n, k, cung):
@@ -405,7 +405,7 @@ def sinh_thuongphat():
             random.shuffle(cung)
         ghi('THUONGPHAT', so, f'{n} {len(cung)}\n' + dong(cung), dap_an_thuongphat(n, cung))
 
-SINH = {'DAOCHIEU': sinh_daochieu, 'MIENPHI': sinh_mienphi, 'KHOANGCACH': sinh_khoangcach,
+SINH = {'DAOCHIEU': sinh_daochieu, 'MIENPHI': sinh_mienphi, 'MOICAP': sinh_moicap,
         'GIAMGIA': sinh_giamgia, 'MOTUYEN': sinh_motuyen, 'THUONGPHAT': sinh_thuongphat}
 
 def main():

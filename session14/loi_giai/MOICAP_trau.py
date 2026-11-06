@@ -1,7 +1,7 @@
-# KHOANGCACH - vet can (subtask 1, n <= 50): moi cau hoi chay Bellman-Ford tu u (n - 1 vong duyet canh).
+# MOICAP - vet can (subtask 1, n <= 50): moi cau hoi chay Bellman-Ford tu u (n - 1 vong duyet canh).
 # Cache theo dinh xuat phat de khong chay lai. O(n * n * m) toi da.
 def main():
-    data = open('KHOANGCACH.INP', 'rb').read().split()
+    data = open('MOICAP.INP', 'rb').read().split()
     n, m, q = int(data[0]), int(data[1]), int(data[2])
     canh = []
     p = 3
@@ -21,7 +21,7 @@ def main():
                         d[v] = d[u] + w
             nho[s] = d
         out.append(str(nho[s][t]) if nho[s][t] < INF else '-1')
-    with open('KHOANGCACH.OUT', 'w') as f:
+    with open('MOICAP.OUT', 'w') as f:
         f.write('\n'.join(out) + '\n')
 
 main()
