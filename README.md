@@ -15,12 +15,12 @@ Code cho lộ trình 24 buổi trong `lo-trinh-hsg-tin-do-thi-qhd-python.md`.
 
 Kiểm tra cuối giai đoạn 2 (120 phút): `kiemtra_gd2/` gồm MUAVE, BALO, NUI.
 
-Mỗi thư mục `buoiNN/` có `loi_giai/` (lời giải chính + bản vét cạn `_trau`), `sinh_test.py`
+Mỗi thư mục `sessionNN/` có `loi_giai/` (lời giải chính + bản vét cạn `_trau`), `sinh_test.py`
 (sinh test theo cấu trúc Themis `test/BAI/TestNN/`), `cham_thu.py` và `template.py`.
 Từ buổi 6, bài có nhiều đáp án đúng (TRUYVET) được chấm bằng hàm cùng tên trong `kiem_tra.py`.
 
 ```
-cd buoi03
+cd session03
 python sinh_test.py           # sinh test cho cả 6 bài
 python cham_thu.py TAPCON     # chấm loi_giai/TAPCON.py
 python cham_thu.py TAPCON loi_giai/TAPCON_trau.py
