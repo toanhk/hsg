@@ -1,8 +1,8 @@
-# CHUTRINH - ban SAI de chua: sau Kahn di TOI (theo cung ra) thay vi di NGUOC.
+# TIMVONG - ban SAI de chua: sau Kahn di TOI (theo cung ra) thay vi di NGUOC.
 # Sai vi dinh nam SAU mot chu trinh cung con deg > 0 nhung co the khong co cung ra nao toi dinh con lai
 # (vi du trong de: dinh 5 sau vong 2 -> 3 -> 4). Khi do truoc[x] = 0 va vong lap di vao dinh 0 -> in sai.
 def main():
-    data = open('CHUTRINH.INP', 'rb').read().split()
+    data = open('TIMVONG.INP', 'rb').read().split()
     n, m = int(data[0]), int(data[1])
     eu = list(map(int, data[2:2 + 2 * m:2]))    # dau cung
     ev = list(map(int, data[3:3 + 2 * m:2]))    # cuoi cung
@@ -35,7 +35,7 @@ def main():
         ct = duong[vt[x]:]
                              # di nguoc nen dao lai cho dung chieu cung
         out = f'{len(ct)}\n' + ' '.join(map(str, ct)) + '\n'
-    with open('CHUTRINH.OUT', 'w') as f:
+    with open('TIMVONG.OUT', 'w') as f:
         f.write(out)
 
 main()

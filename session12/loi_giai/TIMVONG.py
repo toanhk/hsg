@@ -1,4 +1,4 @@
-# CHUTRINH: do thi CO HUONG n dinh, m cung. Neu co chu trinh: in k roi k dinh v1..vk voi
+# TIMVONG: do thi CO HUONG n dinh, m cung. Neu co chu trinh: in k roi k dinh v1..vk voi
 # v1->v2->...->vk->v1 deu la cung (nhieu dap an). Khong co: in -1. n, m <= 2*10^5
 # Cach 1 (file nay): Kahn + di nguoc.
 #   - Chay Kahn; dinh nao con deg > 0 thi KHONG duoc lay ra -> no co mot cung VAO tu mot dinh
@@ -6,9 +6,9 @@
 #   - Ghi truoc[v] = mot dinh u CON LAI co cung u -> v (quet lai danh sach cung mot lan).
 #   - Tu mot dinh con lai, di NGUOC theo truoc[]. Luon di tiep duoc, so dinh huu han -> chac chan
 #     quay lai dinh da qua: doan tu lan gap dau den nay la chu trinh (dang bi dao chieu).
-# Cach 2: DFS 3 mau bang ngan xep (CHUTRINH_dfs.py).  O(n + m)
+# Cach 2: DFS 3 mau bang ngan xep (TIMVONG_dfs.py).  O(n + m)
 def main():
-    data = open('CHUTRINH.INP', 'rb').read().split()
+    data = open('TIMVONG.INP', 'rb').read().split()
     n, m = int(data[0]), int(data[1])
     eu = list(map(int, data[2:2 + 2 * m:2]))    # dau cung
     ev = list(map(int, data[3:3 + 2 * m:2]))    # cuoi cung
@@ -41,7 +41,7 @@ def main():
         ct = duong[vt[x]:]
         ct.reverse()                             # di nguoc nen dao lai cho dung chieu cung
         out = f'{len(ct)}\n' + ' '.join(map(str, ct)) + '\n'
-    with open('CHUTRINH.OUT', 'w') as f:
+    with open('TIMVONG.OUT', 'w') as f:
         f.write(out)
 
 main()

@@ -1,11 +1,11 @@
 # SINH TEST cho 6 bai buoi 12 (Sap xep to-po)
-#   Tren lop : MONHOC, CHUTRINH, SOHOCKY        Ve nha: CONGVIEC, TUDIEN, DINHHUONG
+#   Tren lop : MONHOC, TIMVONG, SOHOCKY        Ve nha: CONGVIEC, TUDIEN, DINHHUONG
 # Cau truc thu muc theo Themis: test/MONHOC/Test01/MONHOC.INP + MONHOC.OUT
 # Dap an tinh bang ham "dap_an_..." viet theo cach KHAC loi giai mau (loi giai mau dung Kahn):
 #   to-po bang DFS 3 mau khong de quy (thu tu hau tu dao nguoc), SOHOCKY va CONGVIEC lam QHD theo thu
 #   tu DFS, CONGVIEC dem viec gang bang "duong dai nhat qua v = dau[v] + duoi[v] - t[v] == T",
 #   TUDIEN chon tham chu nho nhat khong con cung vao bang cach quet lai O(26^2).
-# MONHOC, CHUTRINH, DINHHUONG co nhieu dap an: file .OUT la MOT dap an dung, cham bang kiem_tra.py.
+# MONHOC, TIMVONG, DINHHUONG co nhieu dap an: file .OUT la MOT dap an dung, cham bang kiem_tra.py.
 # Moi bai 10 test: Test01-04 subtask 1 (40%), Test05-07 subtask 2 (30%), Test08-10 subtask 3 (30%)
 # Chay: python sinh_test.py                -> sinh ca 6 bai (~20 giay)
 #       python sinh_test.py MONHOC TUDIEN  -> chi sinh cac bai ke ten
@@ -97,7 +97,7 @@ def sinh_monhoc():
             n = 2 * 10**5; canh, hv = dag(n, 2 * 10**5 - 1, xich=True); canh.append((hv[-1], hv[1]))
         ghi('MONHOC', so, de_canh(n, canh), dap_an_monhoc(n, canh))
 
-# ---------------- CHUTRINH ----------------
+# ---------------- TIMVONG ----------------
 def dap_an_chutrinh(n, canh):
     tt, ct = dfs_topo(n, canh)
     return '-1\n' if ct is None else f'{len(ct)}\n' + ' '.join(map(str, ct)) + '\n'
@@ -124,7 +124,7 @@ def sinh_chutrinh():
             n = 2 * 10**5; canh, hv = dag(n, 2 * 10**5 - 1, xich=True); canh.append((hv[-1], hv[0]))
         else:                                                             # vong 2 dinh o cuoi xich dai
             n = 2 * 10**5; canh, hv = dag(n, 2 * 10**5 - 1, xich=True); canh.append((hv[-1], hv[-2]))
-        ghi('CHUTRINH', so, de_canh(n, canh), dap_an_chutrinh(n, canh))
+        ghi('TIMVONG', so, de_canh(n, canh), dap_an_chutrinh(n, canh))
 
 # ---------------- SOHOCKY ----------------
 def dap_an_sohocky(n, canh):
@@ -339,7 +339,7 @@ def sinh_dinhhuong():
         inp = f'{n} {len(ds)}\n' + ''.join(f'{t} {u} {v}\n' for t, u, v in ds)
         ghi('DINHHUONG', so, inp, dap_an_dinhhuong(n, ds))
 
-SINH = {'MONHOC': sinh_monhoc, 'CHUTRINH': sinh_chutrinh, 'SOHOCKY': sinh_sohocky,
+SINH = {'MONHOC': sinh_monhoc, 'TIMVONG': sinh_chutrinh, 'SOHOCKY': sinh_sohocky,
         'CONGVIEC': sinh_congviec, 'TUDIEN': sinh_tudien, 'DINHHUONG': sinh_dinhhuong}
 
 def main():

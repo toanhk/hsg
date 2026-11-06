@@ -36,7 +36,7 @@ def MONHOC(inp, dap_an, ra):
         vt[x] = i
     return all(vt[u] < vt[v] for u, v in _canh(a, m))
 
-def CHUTRINH(inp, dap_an, ra):
+def TIMVONG(inp, dap_an, ra):
     a = inp.split()
     n, m = int(a[0]), int(a[1])
     b = ra.split()

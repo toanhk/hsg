@@ -1,19 +1,18 @@
-# SINH TEST cho de kiem tra cuoi giai doan 3 (Do thi co ban): HAIPHE, CUUHOA, DEMNGAN
-# Cau truc thu muc theo Themis: test/HAIPHE/Test01/HAIPHE.INP + HAIPHE.OUT
+# SINH TEST cho de kiem tra cuoi giai doan 3 (Do thi co ban): XEPHANG, CUUHOA, TRUNGCHUYEN
+# Cau truc thu muc theo Themis: test/XEPHANG/Test01/XEPHANG.INP + XEPHANG.OUT
 # Dap an tinh bang ham "dap_an_..." viet theo cach KHAC loi giai mau de kiem cheo:
-#   HAIPHE bang DSU co chan le, CUUHOA BFS nhieu nguon voi toa do (i, j) + deque + mang khoang cach
-#   2 chieu (cach "ngay tho", cham nhung dung), DEMNGAN BFS lay d[] roi duyet dinh theo d tang dan va
-#   "keo" cnt tu cac cung VAO (loi giai mau "day" cnt theo cung RA ngay trong luc BFS).
+#   XEPHANG to-po bang DFS 3 mau + "moi cap ke nhau deu co cung" (loi giai mau dem hang doi Kahn),
+#   CUUHOA BFS nhieu nguon voi toa do (i, j) + deque + mang khoang cach 2 chieu (cach "ngay tho"),
+#   TRUNGCHUYEN dem so duong ngan nhat theo 2 modulo: v tren moi duong <=> cnt1[v]*cntn[v] == cnt1[n]
+#   (loi giai mau dem so nut tren tung tang BFS).
 # Moi bai 10 test: Test01-04 subtask 1 (40%), Test05-07 subtask 2 (30%), Test08-10 subtask 3 (30%)
 # Chay: python sinh_test.py              -> sinh ca 3 bai (~25 giay)
 #       python sinh_test.py CUUHOA       -> chi sinh bai ke ten
-# Moi bai co seed rieng (random.seed('HAIPHE-2026'), ...) nen sinh rieng mot bai hay ca bo deu ra CUNG test.
+# Moi bai co seed rieng (random.seed('XEPHANG-2026'), ...) nen sinh rieng mot bai hay ca bo deu ra CUNG test.
 import os, random, sys
 from collections import deque
 
 GOC = 'test'
-MOD = 10**9 + 7
-
 def ghi(bai, so, inp, out):
     d = os.path.join(GOC, bai, f'Test{so:02d}')
     os.makedirs(d, exist_ok=True)
@@ -25,62 +24,71 @@ def ghi(bai, so, inp, out):
 def de_canh(n, canh):
     return f'{n} {len(canh)}\n' + ''.join(f'{u} {v}\n' for u, v in canh)
 
-# ---------------- HAIPHE ----------------
-def dap_an_haiphe(n, canh):
-    cha = list(range(n + 1)); le = [0] * (n + 1); co = [1] * (n + 1)
-    def find(x):                               # tra ve (goc, chan le cua x so voi goc); hop theo kich thuoc
-        p = 0                                  # nen do sau O(log n) nen khong can nen duong
-        while cha[x] != x:
-            p ^= le[x]; x = cha[x]
-        return x, p
-    c = n
+# ---------------- XEPHANG ----------------
+def dap_an_xephang(n, canh):
+    adj = [[] for _ in range(n + 1)]
     for u, v in canh:
-        (ru, pu), (rv, pv) = find(u), find(v)
-        if ru == rv:
-            if pu == pv:
-                return '0\n'
-        else:
-            if co[ru] > co[rv]: ru, rv, pu, pv = rv, ru, pv, pu
-            cha[ru] = rv; le[ru] = pu ^ pv ^ 1; co[rv] += co[ru]; c -= 1
-    return str(pow(2, c, MOD)) + '\n'
+        adj[u].append(v)
+    mau = [0] * (n + 1); hau = []             # DFS 3 mau khong de quy -> thu tu hau tu
+    for s in range(1, n + 1):
+        if mau[s]:
+            continue
+        st = [[s, 0]]; mau[s] = 1
+        while st:
+            top = st[-1]; u = top[0]
+            if top[1] < len(adj[u]):
+                v = adj[u][top[1]]; top[1] += 1
+                if mau[v] == 1:
+                    return '-1\n'                # cung quay ve dinh xam: mau thuan
+                if mau[v] == 0:
+                    mau[v] = 1; st.append([v, 0])
+            else:
+                mau[u] = 2; hau.append(u); st.pop()
+    tt = hau[::-1]
+    co = set(canh)                            # duy nhat <=> moi cap ke nhau trong thu tu deu co cung
+    if all((tt[i], tt[i + 1]) in co for i in range(n - 1)):
+        return ' '.join(map(str, tt)) + '\n'
+    return '0\n'
 
-def hai_phia(n, m):
-    """Do thi hai phia ngau nhien: to mau bi mat, canh chi noi hai mau khac nhau."""
-    mau = [random.randint(0, 1) for _ in range(n + 1)]
-    A = [v for v in range(1, n + 1) if mau[v] == 0]; B = [v for v in range(1, n + 1) if mau[v] == 1]
-    canh = []
-    while len(canh) < m and A and B:
-        canh.append((random.choice(A), random.choice(B)) if random.random() < 0.5 else (random.choice(B), random.choice(A)))
-    return canh, mau
+def bang(n, m, bo=(), vong=None):
+    """Xich hv[0] -> hv[1] -> ... (bang that) + cung tien ngau nhien; bo = chi so i bi bo cung hv[i]->hv[i+1];
+    vong = (i, j) them cung nguoc hv[j] -> hv[i] (j > i) tao chu trinh."""
+    hv = list(range(1, n + 1)); random.shuffle(hv)
+    canh = [(hv[i], hv[i + 1]) for i in range(n - 1) if i not in bo]
+    da = set(canh); cam = {(hv[i], hv[i + 1]) for i in bo}
+    while len(canh) < m - (vong is not None):
+        i = random.randrange(n - 1); j = random.randint(i + 1, min(n - 1, i + 50))
+        e = (hv[i], hv[j])
+        if e not in da and e not in cam:
+            da.add(e); canh.append(e)
+    if vong:
+        canh.append((hv[vong[1]], hv[vong[0]]))
+    random.shuffle(canh)
+    return canh
 
-def sinh_haiphe():
+def sinh_xephang():
     for so in range(1, 11):
         if so == 1:
-            n, canh = 5, [(1, 2), (2, 3), (4, 5)]                     # vi du: {1,3}|{2} va {4}|{5} -> 4
+            n, canh = 4, [(1, 2), (2, 3), (1, 3), (3, 4)]           # vi du: 1 2 3 4
         elif so == 2:
-            n, canh = 4, [(1, 2), (2, 3), (3, 1)]                     # tam giac -> 0
+            n, canh = 3, [(1, 2), (1, 3)]                           # 2 va 3 doi cho duoc -> 0
         elif so == 3:
-            n, canh = 15, []                                          # 2^15
+            n, canh = 5, [(1, 2), (1, 3), (4, 5), (5, 4)]           # vua mo ho vua mau thuan -> -1
         elif so == 4:
-            n = 15; canh, _ = hai_phia(n, 10)
+            n = 8; canh = bang(n, 14)
         elif so == 5:
-            n = 2000; canh, _ = hai_phia(n, 1500)
-        elif so == 6:                                                 # chu trinh le 1999 dinh -> 0
-            n = 2000; canh = [(i, i + 1) for i in range(1, 1999)] + [(1999, 1)]; random.shuffle(canh)
+            n = 2000; canh = bang(n, 5000)
+        elif so == 6:
+            n = 2000; canh = bang(n, 4000, bo={1234})               # thieu dung 1 mat xich -> 0
         elif so == 7:
-            n, canh = 2000, []                                        # 2^2000 mod p: quen mod la sai
+            n = 2000; canh = bang(n, 4000, bo={3}, vong=(1500, 1900))   # mo ho som, vong muon -> -1
         elif so == 8:
-            n = 10**5; canh, _ = hai_phia(n, 2 * 10**5)
-        elif so == 9:                                                 # chu trinh chan 2*10^5 + day cung
-            n = 10**5; hv = list(range(1, n + 1)); random.shuffle(hv)
-            canh = [(hv[i], hv[(i + 1) % n]) for i in range(n)]
-            canh += [(hv[i], hv[(i + 2 * random.randint(1, 50) + 1) % n]) for i in random.sample(range(n), 5 * 10**4 - 1)]
-            canh = canh[:2 * 10**5]; random.shuffle(canh)
-        else:                                                         # hai phia lon + 1 canh pha o cuoi
-            n = 10**5; canh, mau = hai_phia(n, 2 * 10**5 - 1)
-            A = [v for v in range(1, n + 1) if mau[v] == 0]
-            canh.append(tuple(random.sample(A, 2)))
-        ghi('HAIPHE', so, de_canh(n, canh), dap_an_haiphe(n, canh))
+            n = 10**5; canh = bang(n, 2 * 10**5)
+        elif so == 9:
+            n = 10**5; canh = bang(n, 2 * 10**5, bo={n - 3})        # chi mo ho o gan cuoi -> 0
+        else:
+            n = 10**5; canh = bang(n, 2 * 10**5, bo={0}, vong=(70000, 70040))
+        ghi('XEPHANG', so, de_canh(n, canh), dap_an_xephang(n, canh))
 
 # ---------------- CUUHOA ----------------
 def dap_an_cuuhoa(g):
@@ -150,69 +158,92 @@ def sinh_cuuhoa():
         inp = f'{len(g)} {len(g[0])}\n' + '\n'.join(g) + '\n'
         ghi('CUUHOA', so, inp, dap_an_cuuhoa(g))
 
-# ---------------- DEMNGAN ----------------
-def dap_an_demngan(n, canh):
-    adj = [[] for _ in range(n + 1)]; vao = [[] for _ in range(n + 1)]
+# ---------------- TRUNGCHUYEN ----------------
+def dap_an_trungchuyen(n, canh):
+    adj = [[] for _ in range(n + 1)]
     for u, v in canh:
-        adj[u].append(v); vao[v].append(u)
-    d = [-1] * (n + 1); d[1] = 0; q = deque([1])
-    while q:
-        u = q.popleft()
-        for v in adj[u]:
-            if d[v] < 0:
-                d[v] = d[u] + 1; q.append(v)
-    if d[n] < 0:
+        adj[u].append(v); adj[v].append(u)
+    P = (10**9 + 7, 998244353)
+    def bfs_dem(s):                           # khoang cach + so duong ngan nhat theo 2 modulo
+        d = [-1] * (n + 1); c = [[0] * (n + 1) for _ in P]
+        d[s] = 0; c[0][s] = c[1][s] = 1; q = deque([s])
+        while q:
+            u = q.popleft()
+            for v in adj[u]:
+                if d[v] < 0:
+                    d[v] = d[u] + 1; q.append(v)
+                if d[v] == d[u] + 1:
+                    for k in range(2):
+                        c[k][v] = (c[k][v] + c[k][u]) % P[k]
+        return d, c
+    d1, c1 = bfs_dem(1)
+    if d1[n] < 0:
         return '-1\n'
-    thu_tu = sorted((v for v in range(1, n + 1) if d[v] >= 0), key=d.__getitem__)
-    cnt = [0] * (n + 1); cnt[1] = 1
-    for v in thu_tu:
-        if v != 1:
-            cnt[v] = sum(cnt[u] for u in vao[v] if d[u] == d[v] - 1) % MOD
-    return f'{d[n]} {cnt[n]}\n'
+    dn, cn = bfs_dem(n)
+    D = d1[n]
+    tren = [v for v in range(1, n + 1) if d1[v] >= 0 and d1[v] + dn[v] == D]
+    # v tren MOI duong <=> (so duong 1->v) * (so duong v->n) == tong so duong 1->n
+    moi = [v for v in tren if all(c1[k][v] * cn[k][v] % P[k] == c1[k][n] for k in range(2))]
+    return f'{D} {len(tren)} {len(moi)}\n'
 
-def phan_lop(n, rong, m, ngau=0):
-    """Dinh 1, cac lop do rong 'rong', dinh n; cung giua hai lop ke nhau (+ 'ngau' cung ngau nhien)."""
-    giua = list(range(2, n)); random.shuffle(giua)
-    lop = [[1]] + [giua[i:i + rong] for i in range(0, len(giua), rong)] + [[n]]
-    canh = []
-    for a, b in zip(lop, lop[1:]):
-        for v in b:
-            canh.append((random.choice(a), v))                        # moi dinh deu toi duoc
-    while len(canh) < m - ngau:
-        k = random.randrange(len(lop) - 1)
-        canh.append((random.choice(lop[k]), random.choice(lop[k + 1])))
-    while len(canh) < m:
-        canh.append((random.randint(1, n), random.randint(1, n)))
+def tron_nhan(n, canh):
+    """Doi ten ngau nhien cac nut 2..n-1 (giu 1 va n) de khong lo cau truc."""
+    p = list(range(2, n)); random.shuffle(p)
+    ten = [0, 1] + p + [n]
+    canh = [(ten[u], ten[v]) if random.random() < 0.5 else (ten[v], ten[u]) for u, v in canh]
     random.shuffle(canh)
     return canh
 
-def sinh_demngan():
+def luoi(R, C):
+    """Luoi R x C, nut 1 o goc tren-trai, nut R*C o goc duoi-phai."""
+    id_ = lambda i, j: i * C + j + 1
+    canh = [(id_(i, j), id_(i, j + 1)) for i in range(R) for j in range(C - 1)]
+    canh += [(id_(i, j), id_(i + 1, j)) for i in range(R - 1) for j in range(C)]
+    return canh
+
+def chuoi_kim_cuong(n, rong_max):
+    """1 -> [nhom nut] -> nut co chai -> [nhom nut] -> ... -> n. Nhom rong 1 cung la nut co chai."""
+    canh = []; truoc = [1]; v = 2
+    while v < n:
+        k = min(random.randint(1, rong_max), n - v)
+        nhom = list(range(v, v + k)); v += k
+        for x in nhom:
+            canh.append((random.choice(truoc), x))
+        for x in truoc:
+            canh.append((x, random.choice(nhom)))
+        truoc = nhom
+    for x in truoc:
+        canh.append((x, n))
+    return canh
+
+def sinh_trungchuyen():
     for so in range(1, 11):
         if so == 1:
-            n, canh = 6, [(1, 2), (1, 3), (2, 4), (3, 4), (4, 6), (2, 5), (5, 6)]   # vi du: 3 3
+            n, canh = 6, [(1, 2), (1, 3), (2, 4), (3, 4), (4, 6), (4, 5), (5, 6)]   # vi du: 3 5 3
         elif so == 2:
-            n, canh = 5, [(1, 2), (2, 3), (4, 5), (5, 1)]                   # khong toi n -> -1
+            n, canh = 5, [(1, 2), (2, 3), (4, 5)]                                   # khong toi n -> -1
         elif so == 3:
-            n, canh = 1, []                                                # n = 1: 0 1
+            n, canh = 1, []                                                         # n = 1: 0 1 1
         elif so == 4:
-            n = 10; canh = [(random.randint(1, n), random.randint(1, n)) for _ in range(25)]
+            n = 10; canh = tron_nhan(n, [(1, 2), (1, 3), (2, 4), (3, 4), (4, 5), (4, 6), (5, 10), (6, 10),
+                                         (2, 7), (7, 8), (8, 9), (9, 10)])          # 4 7 3
         elif so == 5:
-            n = 2000; canh = [(random.randint(1, n), random.randint(1, n)) for _ in range(3000)]
-            canh += [(i, i + 1) for i in range(1, n)]; random.shuffle(canh)      # xich bao dam toi duoc n
+            n = 1000; canh = tron_nhan(n, [e for e in luoi(25, 40) if random.random() < 0.8])
         elif so == 6:
-            n = 2000; canh = phan_lop(n, 20, 5000)                         # so duong lon -> phai mod
-        elif so == 7:                                                      # cung lap: dem nhieu lan
-            n = 1000; canh = phan_lop(n, 3, 800); canh += canh; random.shuffle(canh)
-        elif so == 8:                                                      # lop rong 2, d ~ 10^5
-            n = 10**5; canh = phan_lop(n, 2, 2 * 10**5)
+            n = 1000; canh = tron_nhan(n, luoi(25, 40))                              # B = 2
+        elif so == 7:
+            n = 1000; canh = tron_nhan(n, chuoi_kim_cuong(n, 4))
+        elif so == 8:
+            n = 200 * 375; canh = tron_nhan(n, luoi(200, 375))                       # 149 425 canh
         elif so == 9:
-            n = 10**5; canh = [(random.randint(1, n), random.randint(1, n)) for _ in range(10**5 + 1)]
-            canh += [(i, i + 1) for i in range(1, n)]; random.shuffle(canh)
+            n = 7 * 10**4; canh = tron_nhan(n, chuoi_kim_cuong(n, 2))
         else:
-            n = 10**5; canh = phan_lop(n, 300, 2 * 10**5, ngau=30000)
-        ghi('DEMNGAN', so, de_canh(n, canh), dap_an_demngan(n, canh))
+            n = 200 * 375; canh = luoi(200, 375)                                     # luoi bi duc lo
+            vien = lambda u: u <= 375 or u % 375 == 0                               # hang dau, cot cuoi
+            canh = tron_nhan(n, [e for e in canh if random.random() < 0.8 or (vien(e[0]) and vien(e[1]))])
+        ghi('TRUNGCHUYEN', so, de_canh(n, canh), dap_an_trungchuyen(n, canh))
 
-SINH = {'HAIPHE': sinh_haiphe, 'CUUHOA': sinh_cuuhoa, 'DEMNGAN': sinh_demngan}
+SINH = {'XEPHANG': sinh_xephang, 'CUUHOA': sinh_cuuhoa, 'TRUNGCHUYEN': sinh_trungchuyen}
 
 def main():
     ds = sys.argv[1:] or list(SINH)

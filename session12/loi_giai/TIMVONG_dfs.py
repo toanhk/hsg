@@ -1,8 +1,8 @@
-# CHUTRINH - cach 2: DFS 3 mau KHONG de quy. 0 = trang (chua tham), 1 = xam (dang nam tren ngan
+# TIMVONG - cach 2: DFS 3 mau KHONG de quy. 0 = trang (chua tham), 1 = xam (dang nam tren ngan
 # xep, tuc la tren duong DFS hien tai), 2 = den (da xong). Gap cung u -> v voi v xam: co chu trinh,
 # chinh la doan ngan xep tu v den u. Ngan xep luu (dinh, chi so cung ke tiep) de "quay lai dung cho".
 def main():
-    data = open('CHUTRINH.INP', 'rb').read().split()
+    data = open('TIMVONG.INP', 'rb').read().split()
     n, m = int(data[0]), int(data[1])
     adj = [[] for _ in range(n + 1)]
     for i in range(2, 2 + 2 * m, 2):
@@ -25,7 +25,7 @@ def main():
                     break
             else:
                 mau[u] = 2; st.pop(); chiso.pop()
-    with open('CHUTRINH.OUT', 'w') as f:
+    with open('TIMVONG.OUT', 'w') as f:
         if ct is None:
             f.write('-1\n')
         else:

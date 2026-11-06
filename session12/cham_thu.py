@@ -1,7 +1,7 @@
 # CHAM THU tren may (thay Themis khi luyen o nha)
 # Chay: python cham_thu.py TONG   -> chay loi_giai/TONG.py tren moi test, bao dung/sai va thoi gian
 # Buoi 6: bai co NHIEU dap an dung (TRUYVET) duoc cham bang ham trong kiem_tra.py thay vi so tung tu.
-# Buoi 12: MONHOC, CHUTRINH, DINHHUONG cung cham bang kiem_tra.py (thu tu / chu trinh nao dung cung duoc).
+# Buoi 12: MONHOC, TIMVONG, DINHHUONG cung cham bang kiem_tra.py (thu tu / chu trinh nao dung cung duoc).
 import os, shutil, subprocess, sys, time, tempfile
 
 try:

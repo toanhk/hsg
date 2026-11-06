@@ -1,8 +1,8 @@
-# CHUTRINH - vet can (n <= 8): thu moi day dinh phan biet v1..vk (k = 1..n), kiem tra la chu trinh.
+# TIMVONG - vet can (n <= 8): thu moi day dinh phan biet v1..vk (k = 1..n), kiem tra la chu trinh.
 from itertools import permutations
 
 def main():
-    data = open('CHUTRINH.INP', 'rb').read().split()
+    data = open('TIMVONG.INP', 'rb').read().split()
     n, m = int(data[0]), int(data[1])
     co = set()
     for i in range(m):
@@ -15,7 +15,7 @@ def main():
                 break
         if kq != '-1':
             break
-    with open('CHUTRINH.OUT', 'w') as f:
+    with open('TIMVONG.OUT', 'w') as f:
         f.write(kq + '\n')
 
 main()
