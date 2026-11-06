@@ -9,9 +9,11 @@ Code cho lộ trình 24 buổi trong `lo-trinh-hsg-tin-do-thi-qhd-python.md`.
 | 3 | Đệ quy & quay lui | XAUNP, TOHOP, TAPCON | HOANVI, QUANHAU, DIENDAU |
 | 4 | Từ đệ quy đến QHĐ | FIBO, CAUTHANG, DOITIEN | CATGO, DEMXAU, VE1 |
 | 5 | QHĐ một chiều | KHONGKE, DOANMAX, TORAO | ECHNHAY, COPHIEU, XOA1 |
+| 6 | Cái túi | TUI01, TUIVOHAN, TRUYVET | CHIAKEO, DOITIEN2, TUILON |
 
 Mỗi thư mục `buoiNN/` có `loi_giai/` (lời giải chính + bản vét cạn `_trau`), `sinh_test.py`
 (sinh test theo cấu trúc Themis `test/BAI/TestNN/`), `cham_thu.py` và `template.py`.
+Từ buổi 6, bài có nhiều đáp án đúng (TRUYVET) được chấm bằng hàm cùng tên trong `kiem_tra.py`.
 
 ```
 cd buoi03
