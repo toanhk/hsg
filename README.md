@@ -12,6 +12,7 @@ Code cho lộ trình 24 buổi trong `lo-trinh-hsg-tin-do-thi-qhd-python.md`.
 | 6 | Cái túi | TUI01, TUIVOHAN, TRUYVET | CHIAKEO, DOITIEN2, TUILON |
 | 7 | Dãy con: LIS, LCS, sửa xâu | LIS, LCS, SUAXAU | DOIXUNG, TENLUA, THAPHOP |
 | 8 | QHĐ trên lưới | DUONGDI, DEMDUONG, HINHVUONG | VANG, HVCON, HAIROBOT |
+| 10 | DFS & liên thông | LIENTHONG, CHUTRINH, HAIPHIA | NHOMBAN, HAIPHE, CHIADOI |
 
 Kiểm tra cuối giai đoạn 2 (120 phút): `kiemtra_gd2/` gồm MUAVE, BALO, NUI.
 
