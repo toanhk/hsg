@@ -20,10 +20,13 @@ Code cho lộ trình 24 buổi trong `lo-trinh-hsg-tin-do-thi-qhd-python.md`.
 | 14 | Biến thể đường đi | DAOCHIEU, MIENPHI, MOICAP | GIAMGIA, MOTUYEN, THUONGPHAT |
 | 15 | DSU (Disjoint Set Union) | KETBAN, DEMNHOM, QUYNHOM | DAONOI, CATDIEN, SONHANG |
 | 16 | Cây khung nhỏ nhất | NOILANG, DOCTHAP, MANGDIEN | GIACOCAU, CHENHLECH, XETAI |
+| 20 | QHĐ bitmask (n ≤ 15–20) | PHANCONG, COMBO, GIAOHANG | GHEPCAP, KHOBAU, LICHHOC |
 
 Kiểm tra cuối giai đoạn 2 (120 phút): `kiemtra_gd2/` gồm MUAVE, BALO, NUI.
 Kiểm tra cuối giai đoạn 3 (120 phút): `kiemtra_gd3/` gồm XEPHANG, CUUHOA (lưới 1000×1000), TRUNGCHUYEN.
 Kiểm tra cuối giai đoạn 4 (thi thử nửa chặng, 150 phút): `kiemtra_gd4/` gồm DONGHANG (QHĐ), CHONTUYEN (Dijkstra), PHANCUM (cây khung đồ thị dày).
+Kiểm tra cuối giai đoạn 5 (bài kết hợp đồ thị + QHĐ, 150 phút, kèm hướng dẫn trình bày): `kiemtra_gd5/` gồm GIAMSAT (QHĐ trên cây 3 trạng thái), NGAMCANH (Dijkstra + QHĐ trên DAG đường ngắn nhất), MUASAM (nhiều lần Dijkstra + QHĐ bitmask).
+Buổi 20 có `do_bitmask.py` đo giới hạn n với Python: 2^n·n chỉ an toàn tới n = 18, TSP 2^n·n² tới n = 16.
 
 Mỗi thư mục `sessionNN/` có `loi_giai/` (lời giải chính + bản vét cạn `_trau`), `sinh_test.py`
 (sinh test theo cấu trúc Themis `test/BAI/TestNN/`), `cham_thu.py` và `template.py`.
