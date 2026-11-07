@@ -1,5 +1,7 @@
 # RBGAME - vet can tro choi cho n <= 20: voi moi vi tri cat, minimax tren DAY THANG (l, r, x, y) co nho.
 # Khong dung nhan xet "cung cua vong" -> doc lap voi loi giai chinh, dung de doi chieu.
+# Thuc te nhanh hon ten goi: x + y bi xac dinh boi (l, r) nen moi vi tri cat chi co O(n^2 * k) trang thai;
+# do tren may Python 3.13 van qua ca 10 test (n = 100, ~0,7 s). Hoc sinh nghi ra cach nay cung du diem.
 import sys
 from functools import lru_cache
 

@@ -1,6 +1,7 @@
 # LEONUI - chat nhi phan dap an D + BFS chi di qua canh co chenh lech <= D.
 # "Di duoc voi D" la tinh chat don dieu (D lon hon thi cang de) nen chat nhi phan duoc.
-# log2(10^6) = 20 lan BFS tren m*n o: kip subtask 1-2 (m, n <= 100), 300 x 300 thi ~2 s -> qua gio.
+# log2(10^6) = 20 lan BFS tren m*n o: kip subtask 1-2 (m, n <= 100). 300 x 300: do tren may Python 3.13
+# mat ~1 s (ban Kruskal 0,2 s) -> sat gio, may phong thi cham hon se mat subtask 3.
 from collections import deque
 
 def main():

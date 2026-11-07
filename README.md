@@ -20,6 +20,10 @@ Code cho lộ trình 24 buổi trong `lo-trinh-hsg-tin-do-thi-qhd-python.md`.
 | 14 | Biến thể đường đi | DAOCHIEU, MIENPHI, MOICAP | GIAMGIA, MOTUYEN, THUONGPHAT |
 | 15 | DSU (Disjoint Set Union) | KETBAN, DEMNHOM, QUYNHOM | DAONOI, CATDIEN, SONHANG |
 | 16 | Cây khung nhỏ nhất | NOILANG, DOCTHAP, MANGDIEN | GIACOCAU, CHENHLECH, XETAI |
+| 17 | QHĐ trên đoạn | GOPSOI, NHANMT, LAYSO | CATDX, BANBONG, DAYNGOAC |
+| 18 | QHĐ trên DAG & trên đồ thị | DUONGDAI, DEMLOTRINH, DUONGRE | TRUOTTUYET, THANGTHUA, CHUYENBAY |
+| 19 | QHĐ trên cây | CAYCON, DUTIEC, DUONGKINH | CATCANH, TONGKC, TIENQUYET |
+| 20 | QHĐ bitmask (n ≤ 15–20) | PHANCONG, COMBO, GIAOHANG | GHEPCAP, KHOBAU, LICHHOC |
 | 21 | Thi thử đề thật Ninh Bình 2023-2024 (06/10/2023) | PAIRCOUNT, KPRIMESUB, ST25 | SEQ, RBGAME (đề 07/10/2023) |
 | 22 | Chiến thuật, trâu + đối chiếu; thi thử số 2 | TRAMSAC, LEONUI, XEPLICH | |
 | 23 | Thi thử số 3, chữa theo lỗi hay gặp | TONGCON, GIOHANG, PHATUONG | |
@@ -28,6 +32,8 @@ Code cho lộ trình 24 buổi trong `lo-trinh-hsg-tin-do-thi-qhd-python.md`.
 Kiểm tra cuối giai đoạn 2 (120 phút): `kiemtra_gd2/` gồm MUAVE, BALO, NUI.
 Kiểm tra cuối giai đoạn 3 (120 phút): `kiemtra_gd3/` gồm XEPHANG, CUUHOA (lưới 1000×1000), TRUNGCHUYEN.
 Kiểm tra cuối giai đoạn 4 (thi thử nửa chặng, 150 phút): `kiemtra_gd4/` gồm DONGHANG (QHĐ), CHONTUYEN (Dijkstra), PHANCUM (cây khung đồ thị dày).
+Kiểm tra cuối giai đoạn 5 (bài kết hợp đồ thị + QHĐ, 150 phút, kèm hướng dẫn trình bày): `kiemtra_gd5/` gồm GIAMSAT (QHĐ trên cây 3 trạng thái), NGAMCANH (Dijkstra + QHĐ trên DAG đường ngắn nhất), MUASAM (nhiều lần Dijkstra + QHĐ bitmask).
+Buổi 20 có `do_bitmask.py` đo giới hạn n với Python: 2^n·n chỉ an toàn tới n = 18, TSP 2^n·n² tới n = 16.
 
 Giai đoạn 6 (buổi 21–24): đề thật lấy từ `De_24_THPT.docx` (bộ test tự sinh theo đúng ràng buộc, không phải test chính thức).
 `session22/doi_chieu.py` + `sinh_nho/` đối chiếu lời giải với trâu trên test ngẫu nhiên nhỏ;
