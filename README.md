@@ -16,6 +16,8 @@ Code cho lộ trình 24 buổi trong `lo-trinh-hsg-tin-do-thi-qhd-python.md`.
 | 10 | DFS & liên thông | LIENTHONG, CHUTRINH, HAIPHIA | NHOMBAN, HAIPHE, CHIADOI |
 | 11 | Loang trên lưới | DEMDAO, MECUNG, LUALAN | HONUOC, QUANMA, CHAYTHOAT |
 | 12 | Sắp xếp tô-pô | MONHOC, TIMVONG, SOHOCKY | CONGVIEC, TUDIEN, DINHHUONG |
+| 13 | Dijkstra | KHOANGCACH, HANHTRINH, QUATRAM | BENHVIEN, SUADUONG, TAUHOA |
+| 14 | Biến thể đường đi | DAOCHIEU, MIENPHI, MOICAP | GIAMGIA, MOTUYEN, THUONGPHAT |
 | 15 | DSU (Disjoint Set Union) | KETBAN, DEMNHOM, QUYNHOM | DAONOI, CATDIEN, SONHANG |
 
 Kiểm tra cuối giai đoạn 2 (120 phút): `kiemtra_gd2/` gồm MUAVE, BALO, NUI.
@@ -23,7 +25,7 @@ Kiểm tra cuối giai đoạn 3 (120 phút): `kiemtra_gd3/` gồm XEPHANG, CUUH
 
 Mỗi thư mục `sessionNN/` có `loi_giai/` (lời giải chính + bản vét cạn `_trau`), `sinh_test.py`
 (sinh test theo cấu trúc Themis `test/BAI/TestNN/`), `cham_thu.py` và `template.py`.
-Từ buổi 6, bài có nhiều đáp án đúng (TRUYVET, LOTRINH; buổi 12: MONHOC, TIMVONG, DINHHUONG) được chấm bằng hàm cùng tên trong `kiem_tra.py`.
+Từ buổi 6, bài có nhiều đáp án đúng (TRUYVET, LOTRINH; buổi 12: MONHOC, TIMVONG, DINHHUONG; buổi 13: HANHTRINH) được chấm bằng hàm cùng tên trong `kiem_tra.py`.
 
 ```
 cd session03
