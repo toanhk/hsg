@@ -17,6 +17,7 @@ Code cho lộ trình 24 buổi trong `lo-trinh-hsg-tin-do-thi-qhd-python.md`.
 | 11 | Loang trên lưới | DEMDAO, MECUNG, LUALAN | HONUOC, QUANMA, CHAYTHOAT |
 | 12 | Sắp xếp tô-pô | MONHOC, TIMVONG, SOHOCKY | CONGVIEC, TUDIEN, DINHHUONG |
 | 13 | Dijkstra | KHOANGCACH, HANHTRINH, QUATRAM | BENHVIEN, SUADUONG, TAUHOA |
+| 14 | Biến thể đường đi | DAOCHIEU, MIENPHI, MOICAP | GIAMGIA, MOTUYEN, THUONGPHAT |
 
 Kiểm tra cuối giai đoạn 2 (120 phút): `kiemtra_gd2/` gồm MUAVE, BALO, NUI.
 Kiểm tra cuối giai đoạn 3 (120 phút): `kiemtra_gd3/` gồm XEPHANG, CUUHOA (lưới 1000×1000), TRUNGCHUYEN.
