@@ -20,10 +20,19 @@ Code cho lộ trình 24 buổi trong `lo-trinh-hsg-tin-do-thi-qhd-python.md`.
 | 14 | Biến thể đường đi | DAOCHIEU, MIENPHI, MOICAP | GIAMGIA, MOTUYEN, THUONGPHAT |
 | 15 | DSU (Disjoint Set Union) | KETBAN, DEMNHOM, QUYNHOM | DAONOI, CATDIEN, SONHANG |
 | 16 | Cây khung nhỏ nhất | NOILANG, DOCTHAP, MANGDIEN | GIACOCAU, CHENHLECH, XETAI |
+| 21 | Thi thử đề thật Ninh Bình 2023-2024 (06/10/2023) | PAIRCOUNT, KPRIMESUB, ST25 | SEQ, RBGAME (đề 07/10/2023) |
+| 22 | Chiến thuật, trâu + đối chiếu; thi thử số 2 | TRAMSAC, LEONUI, CAMERA | |
+| 23 | Thi thử số 3, chữa theo lỗi hay gặp | TONGCON, MUASAM, PHATUONG | |
+| 24 | Đề khởi động, thư viện code mẫu, kiểm tra máy | SONT, NOIMANG, LATGACH | |
 
 Kiểm tra cuối giai đoạn 2 (120 phút): `kiemtra_gd2/` gồm MUAVE, BALO, NUI.
 Kiểm tra cuối giai đoạn 3 (120 phút): `kiemtra_gd3/` gồm XEPHANG, CUUHOA (lưới 1000×1000), TRUNGCHUYEN.
 Kiểm tra cuối giai đoạn 4 (thi thử nửa chặng, 150 phút): `kiemtra_gd4/` gồm DONGHANG (QHĐ), CHONTUYEN (Dijkstra), PHANCUM (cây khung đồ thị dày).
+
+Giai đoạn 6 (buổi 21–24): đề thật lấy từ `De_24_THPT.docx` (bộ test tự sinh theo đúng ràng buộc, không phải test chính thức).
+`session22/doi_chieu.py` + `sinh_nho/` đối chiếu lời giải với trâu trên test ngẫu nhiên nhỏ;
+`session23/soat_bai.py` soát lỗi hình thức (tên file, input(), đệ quy) trước khi nộp, các bản lỗi `_sai`, `_quenreset`, `_bang`;
+`session24/thu_vien/` là thư viện code mẫu (đồ thị, QHĐ, số học) kèm `kiem_thu_thu_vien.py`, `session24/kiem_tra_may.py` đo hệ số chậm của máy thi.
 
 Mỗi thư mục `sessionNN/` có `loi_giai/` (lời giải chính + bản vét cạn `_trau`), `sinh_test.py`
 (sinh test theo cấu trúc Themis `test/BAI/TestNN/`), `cham_thu.py` và `template.py`.
