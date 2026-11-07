@@ -2,7 +2,8 @@
 #   dem(n) = 1, dem(u) = tong dem(v) voi u -> v, nho ket qua trong mang.
 # Van de: do sau de quy = do dai duong di dai nhat. Test "chuoi" 1 -> 2 -> ... -> 2*10^5 lam de quy sau
 # 2*10^5 tang: RecursionError, hoac vo ngan xep C (chuong trinh chet khong bao loi) tren Windows/Python cu
-# du da setrecursionlimit. Bai hoc: QHD tren DAG viet theo thu tu to-po bang vong lap (DEMLOTRINH.py).
+# du da setrecursionlimit. (Python 3.12+ tren Linux thi chay duoc: do tren may 3.13 van 10/10, ~0,5 s -
+# nhung khong the biet truoc may phong thi dung ban nao.) Bai hoc: QHD tren DAG viet theo thu tu to-po bang vong lap (DEMLOTRINH.py).
 import sys
 
 P = 10**9 + 7
