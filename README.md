@@ -21,6 +21,7 @@ Code cho lộ trình 24 buổi trong `lo-trinh-hsg-tin-do-thi-qhd-python.md`.
 | 15 | DSU (Disjoint Set Union) | KETBAN, DEMNHOM, QUYNHOM | DAONOI, CATDIEN, SONHANG |
 | 16 | Cây khung nhỏ nhất | NOILANG, DOCTHAP, MANGDIEN | GIACOCAU, CHENHLECH, XETAI |
 | 17 | QHĐ trên đoạn | GOPSOI, NHANMT, LAYSO | CATDX, BANBONG, DAYNGOAC |
+| 18 | QHĐ trên DAG & trên đồ thị | DUONGDAI, DEMLOTRINH, DUONGRE | TRUOTTUYET, THANGTHUA, CHUYENBAY |
 
 Kiểm tra cuối giai đoạn 2 (120 phút): `kiemtra_gd2/` gồm MUAVE, BALO, NUI.
 Kiểm tra cuối giai đoạn 3 (120 phút): `kiemtra_gd3/` gồm XEPHANG, CUUHOA (lưới 1000×1000), TRUNGCHUYEN.
