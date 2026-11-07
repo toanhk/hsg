@@ -19,9 +19,11 @@ Code cho lộ trình 24 buổi trong `lo-trinh-hsg-tin-do-thi-qhd-python.md`.
 | 13 | Dijkstra | KHOANGCACH, HANHTRINH, QUATRAM | BENHVIEN, SUADUONG, TAUHOA |
 | 14 | Biến thể đường đi | DAOCHIEU, MIENPHI, MOICAP | GIAMGIA, MOTUYEN, THUONGPHAT |
 | 15 | DSU (Disjoint Set Union) | KETBAN, DEMNHOM, QUYNHOM | DAONOI, CATDIEN, SONHANG |
+| 16 | Cây khung nhỏ nhất | NOILANG, DOCTHAP, MANGDIEN | GIACOCAU, CHENHLECH, XETAI |
 
 Kiểm tra cuối giai đoạn 2 (120 phút): `kiemtra_gd2/` gồm MUAVE, BALO, NUI.
 Kiểm tra cuối giai đoạn 3 (120 phút): `kiemtra_gd3/` gồm XEPHANG, CUUHOA (lưới 1000×1000), TRUNGCHUYEN.
+Kiểm tra cuối giai đoạn 4 (thi thử nửa chặng, 150 phút): `kiemtra_gd4/` gồm DONGHANG (QHĐ), CHONTUYEN (Dijkstra), PHANCUM (cây khung đồ thị dày).
 
 Mỗi thư mục `sessionNN/` có `loi_giai/` (lời giải chính + bản vét cạn `_trau`), `sinh_test.py`
 (sinh test theo cấu trúc Themis `test/BAI/TestNN/`), `cham_thu.py` và `template.py`.
