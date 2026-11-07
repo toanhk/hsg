@@ -252,8 +252,10 @@ def sinh_giamgia():
             n, k = 5, 2; cung = [(1, 2, 5), (2, 3, 7), (5, 4, 1), (4, 1, 1), (3, 1, 9)]
         elif so == 4:
             n, k = 100, 3; cung = gan_gia(dao_ngau_nhien(them_canh(n, cay_ngau_nhien(n), 500)), 1, 999)
-        elif so == 5:
-            n, k = 10**4, 1; cung = gan_gia(dao_ngau_nhien(them_canh(n, cay_ngau_nhien(n, True), 3 * 10**4), 0.3), 1, 10**9)
+        elif so == 5:                                                       # xich liet ke nguoc (giong test 9), k = 1
+            n, k = 10**4, 1
+            cung = [(i, i + 1, random.randint(1, 10**4)) for i in range(n - 1, 0, -1)]
+            cung += gan_gia([tuple(random.sample(range(1, n + 1), 2)) for _ in range(3 * 10**4 - len(cung))], 3 * 10**8, 10**9)
         elif so == 6:
             n, k = 10**4, 1; cung = gan_gia(dao_ngau_nhien(them_canh(n, cay_ngau_nhien(n), 3 * 10**4)), 1, 10**9)
         elif so == 7:                                                       # 1 chuyen cuc dat la loi tat
@@ -261,12 +263,17 @@ def sinh_giamgia():
             cung.append((1, n, 10**9 - 1))
         elif so == 8:
             n, k = 10**4, 5; cung = gan_gia(dao_ngau_nhien(them_canh(n, cay_ngau_nhien(n, True), 3 * 10**4), 0.3), 1, 10**9)
-        elif so == 9:
-            n, k = 10**4, 5; cung = gan_gia(dao_ngau_nhien(them_canh(n, cay_ngau_nhien(n), 3 * 10**4)), 1, 10**9)
+        elif so == 9:                                                       # xich dai, liet ke NGUOC: chan Bellman-Ford
+            # Duong re nhat la xich 1 -> 2 -> ... -> n (tong <= 10^8); cac chuyen them deu >= 3*10^8 nen
+            # du giam nua gia van khong lam loi tat. Liet ke cung xich tu cuoi ve dau va KHONG tron:
+            # moi luot Bellman-Ford chi noi them mot dinh -> can ~n luot -> GIAMGIA_trau qua gio.
+            n, k = 10**4, 5
+            cung = [(i, i + 1, random.randint(1, 10**4)) for i in range(n - 1, 0, -1)]
+            cung += gan_gia([tuple(random.sample(range(1, n + 1), 2)) for _ in range(3 * 10**4 - len(cung))], 3 * 10**8, 10**9)
         else:                                                               # vai chuyen rat dat tren duong
             n, k = 10**4, 5; cung = gan_gia(dao_ngau_nhien(them_canh(n, cay_ngau_nhien(n, True), 3 * 10**4), 0.2), 1, 10**4)
             cung = [(u, v, w * 99991 if random.random() < 0.05 else w) for u, v, w in cung]
-        if so > 1:
+        if so > 1 and so not in (5, 9):
             random.shuffle(cung)
         ghi('GIAMGIA', so, f'{n} {len(cung)} {k}\n' + dong(cung), dap_an_giamgia(n, k, cung))
 
