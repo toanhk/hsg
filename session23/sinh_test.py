@@ -1,10 +1,10 @@
-# SINH TEST buoi 23 - de thi thu so 3 (180 phut): TONGCON, MUASAM, PHATUONG
+# SINH TEST buoi 23 - de thi thu so 3 (180 phut): TONGCON, GIOHANG, PHATUONG
 # Bo test nay CO Y cai bay cho cac loi hay gap: sai bien (TONGCON: nhieu so 0, doan tong dung bang L),
-# cap nhat tai cho (MUASAM: nhieu mon cung nhom), quen reset (PHATUONG: nhieu bo test), qua gio (test lon).
+# cap nhat tai cho (GIOHANG: nhieu mon cung nhom), quen reset (PHATUONG: nhieu bo test), qua gio (test lon).
 # Cau truc thu muc theo Themis: test/TONGCON/Test01/TONGCON.INP + TONGCON.OUT
 # Dap an tinh bang ham "dap_an_..." viet theo cach KHAC loi giai mau de kiem cheo:
 #   TONGCON mang cong don + bisect (loi giai mau: hai con tro),
-#   MUASAM QHD hai hang "keo ve" theo tung nhom (loi giai mau: map tren lat cat),
+#   GIOHANG QHD hai hang "keo ve" theo tung nhom (loi giai mau: map tren lat cat),
 #   PHATUONG BFS tren do thi trang thai (o, da pha) ma hoa so nguyen (loi giai mau: 2 BFS tu S va T).
 # Moi bai 10 test: Test01-04 subtask 1 (40%), Test05-07 subtask 2 (30%), Test08-10 subtask 3 (30%)
 # Chay: python sinh_test.py              -> sinh ca 3 bai (~40 giay)
@@ -56,8 +56,8 @@ def sinh_tongcon():
         inp = f'{len(a)} {L} {R}\n' + ' '.join(map(str, a)) + '\n'
         ghi('TONGCON', so, inp, dap_an_tongcon(L, R, a))
 
-# ---------------- MUASAM ----------------
-def dap_an_muasam(B, mon):
+# ---------------- GIOHANG ----------------
+def dap_an_giohang(B, mon):
     nhom = {}
     for g, w, v in mon:
         nhom.setdefault(g, []).append((w, v))
@@ -77,7 +77,7 @@ def mon_ngau_nhien(n, B, so_nhom, wmax=None):
     wmax = wmax or B
     return [(random.randint(1, so_nhom), random.randint(1, wmax), random.randint(1, 10**6)) for _ in range(n)]
 
-def sinh_muasam():
+def sinh_giohang():
     for so in range(1, 11):
         if so == 1:                                                             # vi du: 14
             B = 10; mon = [(1, 4, 5), (1, 5, 6), (2, 3, 4), (2, 6, 9), (3, 2, 3)]
@@ -100,7 +100,7 @@ def sinh_muasam():
         else:
             B = 5000; mon = [(i + 1, random.randint(1, 50), random.randint(1, 10**6)) for i in range(1000)]
         inp = f'{len(mon)} {B}\n' + ''.join(f'{g} {w} {v}\n' for g, w, v in mon)
-        ghi('MUASAM', so, inp, dap_an_muasam(B, mon))
+        ghi('GIOHANG', so, inp, dap_an_giohang(B, mon))
 
 # ---------------- PHATUONG ----------------
 def dap_an_phatuong(bo):
@@ -172,7 +172,7 @@ def sinh_phatuong():
         inp = f'{len(bo)}\n' + ''.join(f'{r} {c}\n' + '\n'.join(g) + '\n' for r, c, g in bo)
         ghi('PHATUONG', so, inp, dap_an_phatuong(bo))
 
-SINH = {'TONGCON': sinh_tongcon, 'MUASAM': sinh_muasam, 'PHATUONG': sinh_phatuong}
+SINH = {'TONGCON': sinh_tongcon, 'GIOHANG': sinh_giohang, 'PHATUONG': sinh_phatuong}
 
 def main():
     ds = sys.argv[1:] or list(SINH)

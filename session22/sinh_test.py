@@ -1,13 +1,13 @@
-# SINH TEST buoi 22 - de thi thu so 2 (180 phut): TRAMSAC, LEONUI, CAMERA
+# SINH TEST buoi 22 - de thi thu so 2 (150 phut): TRAMSAC, LEONUI, XEPLICH
 # Cau truc thu muc theo Themis: test/TRAMSAC/Test01/TRAMSAC.INP + TRAMSAC.OUT
 # Dap an tinh bang ham "dap_an_..." viet theo cach KHAC loi giai mau de kiem cheo:
 #   TRAMSAC hang doi don dieu (deque) lay min cua so (loi giai mau: heapq bo phan tu het han),
 #   LEONUI Dijkstra "minimax" (khoang cach = canh lon nhat tren duong) (loi giai mau: Kruskal + DSU),
-#   CAMERA QHD cay voi bo trang thai khac: "co camera / duoc cha giam sat / phai nho con".
+#   XEPLICH QHD tu phai sang theo ngay bat dau (loi giai mau: tu trai sang theo ngay ket thuc).
 # Moi bai 10 test: Test01-04 subtask 1 (40%), Test05-07 subtask 2 (30%), Test08-10 subtask 3 (30%)
 # Chay: python sinh_test.py              -> sinh ca 3 bai (~20 giay)
-#       python sinh_test.py CAMERA       -> chi sinh bai ke ten
-import os, random, sys, heapq
+#       python sinh_test.py XEPLICH       -> chi sinh bai ke ten
+import os, random, sys, heapq, bisect
 from collections import deque
 
 GOC = 'test'
@@ -128,68 +128,53 @@ def sinh_leonui():
         inp = f'{m} {n}\n' + ''.join(' '.join(map(str, h[i * n:(i + 1) * n])) + '\n' for i in range(m))
         ghi('LEONUI', so, inp, dap_an_leonui(m, n, h))
 
-# ---------------- CAMERA ----------------
-def dap_an_camera(n, c, canh):
-    adj = [[] for _ in range(n + 1)]
-    for u, v in canh:
-        adj[u].append(v); adj[v].append(u)
-    par = [0] * (n + 1); seen = [False] * (n + 1); seen[1] = True
-    q = deque([1]); order = []
-    while q:                                          # thu tu BFS (khac loi giai mau dung ngan xep)
-        u = q.popleft(); order.append(u)
-        for v in adj[u]:
-            if not seen[v]:
-                seen[v] = True; par[v] = u; q.append(v)
-    INF = 1 << 60
-    X = [0] * (n + 1)   # v co camera
-    Y = [0] * (n + 1)   # v khong camera, CHA co camera (v da duoc giam sat)
-    Z = [0] * (n + 1)   # v khong camera, can it nhat mot con co camera
-    for v in reversed(order):
-        ch = [u for u in adj[v] if u != par[v]]
-        X[v] = c[v - 1] + sum(min(X[u], Y[u]) for u in ch)
-        Y[v] = sum(min(X[u], Z[u]) for u in ch)
-        if ch:
-            s = sum(min(X[u], Z[u]) for u in ch)
-            Z[v] = s + max(0, min(X[u] - Z[u] for u in ch))
-        else:
-            Z[v] = INF
-    return f'{min(X[1], Z[1])}\n'
+# ---------------- XEPLICH ----------------
+def dap_an_xeplich(viec):
+    # QHD "tu phai sang": sap theo ngay BAT DAU, g[i] = tot nhat voi cac viec i..n-1
+    v = sorted(viec)                                   # (s, e, p)
+    starts = [x[0] for x in v]
+    n = len(v)
+    g = [0] * (n + 1)
+    for i in range(n - 1, -1, -1):
+        s, e, p = v[i]
+        j = bisect.bisect_right(starts, e)             # viec dau tien bat dau sau ngay e
+        g[i] = max(g[i + 1], p + g[j])
+    return f'{g[0]}\n'
 
-def cay_ngau_nhien(n, kieu='ngau_nhien'):
-    p = list(range(1, n + 1)); random.shuffle(p)
-    canh = []
-    for i in range(1, n):
-        if kieu == 'chuoi':
-            j = i - 1
-        elif kieu == 'sao':
-            j = 0
-        elif kieu == 'sau_bu':                         # "sau bu": xuong song dai + la treo
-            j = i - 1 if i % 3 else i - 2 if i >= 2 else 0
-        else:
-            j = random.randrange(max(0, i - 5), i) if random.random() < 0.5 else random.randrange(i)
-        canh.append((p[i], p[j]))
-    random.shuffle(canh)
-    return canh
+def viec_ngau_nhien(n, D, dai, pmax):
+    res = []
+    for _ in range(n):
+        s = random.randint(1, D); e = min(D, s + random.randint(0, dai))
+        res.append((s, e, random.randint(1, pmax)))
+    return res
 
-def sinh_camera():
+def sinh_xeplich():
     for so in range(1, 11):
-        if so == 1:                                   # vi du: 5
-            n = 6; c = [3, 2, 4, 1, 5, 2]; canh = [(1, 2), (1, 3), (3, 4), (3, 5), (5, 6)]
-        elif so == 2:
-            n = 1; c = [7]; canh = []
+        if so == 1:                                   # vi du: 10
+            viec = [(1, 3, 5), (2, 5, 6), (4, 6, 5), (6, 7, 4)]
+        elif so == 2:                                 # bay "e <= s": cac viec noi duoi chung mot ngay
+            viec = [(1, 5, 10), (5, 9, 10), (9, 12, 10), (2, 4, 1)]
         elif so == 3:
-            n = 15; c = [random.randint(1, 10**4) for _ in range(n)]; canh = cay_ngau_nhien(n)
-        elif so == 4:                                 # sao: tam dat dat
-            n = 15; c = [random.randint(1, 20) for _ in range(n)]; canh = cay_ngau_nhien(n, 'sao')
-        elif so <= 7:
-            n = 10**5; c = [1] * n; canh = cay_ngau_nhien(n, ['ngau_nhien', 'chuoi', 'sau_bu'][so - 5])
+            viec = viec_ngau_nhien(15, 50, 10, 100)
+        elif so == 4:                                 # bay tham lam: viec ngan re, viec dai dat
+            viec = [(i, i + 1, 1) for i in range(1, 14, 2)] + [(1, 14, 50)]
+        elif so == 5:
+            viec = viec_ngau_nhien(5000, 10**9, 10**7, 10**9)
+        elif so == 6:
+            viec = viec_ngau_nhien(5000, 10**5, 10**5, 10**9)   # viec rat dai, trung nhau nhieu
+        elif so == 7:
+            viec = viec_ngau_nhien(5000, 20000, 5, 10)
+        elif so == 8:
+            viec = viec_ngau_nhien(2 * 10**5, 10**9, 10**6, 10**9)
+        elif so == 9:
+            viec = viec_ngau_nhien(2 * 10**5, 10**9, 10**9, 10**9) # gan nhu moi viec trung nhau
         else:
-            n = 10**5; c = [random.randint(1, 10**4) for _ in range(n)]
-            canh = cay_ngau_nhien(n, ['ngau_nhien', 'chuoi', 'sao'][so - 8])
-        inp = f'{n}\n' + ' '.join(map(str, c)) + '\n' + ''.join(f'{u} {v}\n' for u, v in canh)
-        ghi('CAMERA', so, inp, dap_an_camera(n, c, canh))
+            viec = [(5, 5, random.randint(1, 10**9)) for _ in range(10**5)] + viec_ngau_nhien(10**5, 10**6, 3, 10**9)
+            random.shuffle(viec)
+        inp = f'{len(viec)}\n' + ''.join(f'{s} {e} {p}\n' for s, e, p in viec)
+        ghi('XEPLICH', so, inp, dap_an_xeplich(viec))
 
-SINH = {'TRAMSAC': sinh_tramsac, 'LEONUI': sinh_leonui, 'CAMERA': sinh_camera}
+SINH = {'TRAMSAC': sinh_tramsac, 'LEONUI': sinh_leonui, 'XEPLICH': sinh_xeplich}
 
 def main():
     ds = sys.argv[1:] or list(SINH)

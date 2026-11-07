@@ -1,7 +1,7 @@
-# MUASAM - bang 2 chieu dp[k][b] theo tung nhom (dung nhung cham + ton bo nho): truy cap dp[k][b] long nhau
+# GIOHANG - bang 2 chieu dp[k][b] theo tung nhom (dung nhung cham + ton bo nho): truy cap dp[k][b] long nhau
 # cham hon nhieu so voi mot mang. Kip subtask nho; test lon ~1,5 s.
 def main():
-    data = open('MUASAM.INP', 'rb').read().split()
+    data = open('GIOHANG.INP', 'rb').read().split()
     n, B = int(data[0]), int(data[1])
     nhom = {}
     pos = 2
@@ -17,7 +17,7 @@ def main():
             for w, v in ds_nhom[k - 1]:
                 if w <= b and dp[k - 1][b - w] + v > dp[k][b]:
                     dp[k][b] = dp[k - 1][b - w] + v
-    with open('MUASAM.OUT', 'w') as fo:
+    with open('GIOHANG.OUT', 'w') as fo:
         fo.write(str(dp[G][B]) + '\n')
 
 main()

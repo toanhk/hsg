@@ -21,8 +21,8 @@ Code cho lộ trình 24 buổi trong `lo-trinh-hsg-tin-do-thi-qhd-python.md`.
 | 15 | DSU (Disjoint Set Union) | KETBAN, DEMNHOM, QUYNHOM | DAONOI, CATDIEN, SONHANG |
 | 16 | Cây khung nhỏ nhất | NOILANG, DOCTHAP, MANGDIEN | GIACOCAU, CHENHLECH, XETAI |
 | 21 | Thi thử đề thật Ninh Bình 2023-2024 (06/10/2023) | PAIRCOUNT, KPRIMESUB, ST25 | SEQ, RBGAME (đề 07/10/2023) |
-| 22 | Chiến thuật, trâu + đối chiếu; thi thử số 2 | TRAMSAC, LEONUI, CAMERA | |
-| 23 | Thi thử số 3, chữa theo lỗi hay gặp | TONGCON, MUASAM, PHATUONG | |
+| 22 | Chiến thuật, trâu + đối chiếu; thi thử số 2 | TRAMSAC, LEONUI, XEPLICH | |
+| 23 | Thi thử số 3, chữa theo lỗi hay gặp | TONGCON, GIOHANG, PHATUONG | |
 | 24 | Đề khởi động, thư viện code mẫu, kiểm tra máy | SONT, NOIMANG, LATGACH | |
 
 Kiểm tra cuối giai đoạn 2 (120 phút): `kiemtra_gd2/` gồm MUAVE, BALO, NUI.

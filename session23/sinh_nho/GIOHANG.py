@@ -1,4 +1,4 @@
-# Sinh MOT test nho cho MUASAM (n <= 8 mon, it nhom de hay trung nhom).
+# Sinh MOT test nho cho GIOHANG (n <= 8 mon, it nhom de hay trung nhom).
 import random, sys
 random.seed(int(sys.argv[1]))
 n = random.randint(1, 8); B = random.randint(1, 20)
